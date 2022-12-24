@@ -32,10 +32,6 @@ const FileDropzone = ({ setFile }) => {
       <div className="container mx-auto w-full h-24 p-2 bg-slate-200 rounded my-2 flex justify-center items-center cursor-pointer">
         <p className="text-slate-600">{dropzoneMessage}</p>
       </div>
-      {/* {acceptedFiles.length > 0 && (
-        <h2 className="text-2xl font-semibold">File uploaded</h2>
-      )}
-      {renderedAcceptedFiles} */}
     </div>
   );
 };

@@ -9,7 +9,6 @@ const App = () => {
   const [file, setFile] = useState(null);
   const [columns, setColumns] = useState(null);
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [hypotheticalValues, setHypotheticalValues] = useState({});
   const [selectedInputs, setSelectedInputs] = useState([]);
   const [selectedOutput, setSelectedOutput] = useState(null);
@@ -85,7 +84,6 @@ const App = () => {
     ));
 
   const sendTrainRequest = async () => {
-    setLoading(true);
     const res = await axios
       .post("http://localhost:8000/api/train", {
         inputs: selectedInputs,
@@ -95,15 +93,13 @@ const App = () => {
       })
       .catch((err) => console.error(err));
     setPrediction(res.data.prediction);
-    setLoading(false);
   };
 
   return (
     <div className="container mx-auto p-5 pb-9">
       <h1 className="text-4xl font-bold">AutoML</h1>
       <div className="mt-2">
-        Upload a spreadsheet <i>(ideally in CSV format)</i> below to get
-        started!
+        Upload a spreadsheet <i>(in CSV format)</i> below to get started!
       </div>
       <FileDropzone setFile={setFile} />
       {file && data && (
@@ -160,9 +156,9 @@ const App = () => {
           <button
             onClick={sendTrainRequest}
             disabled={selectedInputs.length === 0 || !selectedOutput}
-            className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded w-50 cursor-pointer mt-2"
+            className="disabled:pointer-events-none disabled:opacity-50 bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded w-50 cursor-pointer mt-2"
           >
-            Train
+            Train & Predict
           </button>
           {prediction && (
             <div>
