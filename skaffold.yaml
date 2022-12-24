@@ -1,0 +1,30 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: rocky1638/activelytakehomechallenge-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      # for syncing data into the pod
+      # if not included, skaffold will rebuild the image
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.{js,jsx}"
+    - image: rocky1638/activelytakehomechallenge-api
+      context: api
+      docker:
+        dockerfile: Dockerfile
+      # for syncing data into the pod
+      # if not included, skaffold will rebuild the image
+      sync:
+        manual:
+          - dest: .
+            src: "*.py"

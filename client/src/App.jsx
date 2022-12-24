@@ -85,7 +85,7 @@ const App = () => {
 
   const sendTrainRequest = async () => {
     const res = await axios
-      .post("http://localhost:8000/api/train", {
+      .post("http://api-srv:8000/api/train", {
         inputs: selectedInputs,
         output: selectedOutput,
         rows: JSON.stringify(data),

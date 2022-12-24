@@ -3,10 +3,13 @@ import { useDropzone } from "react-dropzone";
 
 const FileDropzone = ({ setFile }) => {
   const [acceptedFiles, setAcceptedFiles] = useState([]);
-  const onDrop = useCallback((acceptedFiles) => {
-    setAcceptedFiles(acceptedFiles);
-    setFile(acceptedFiles[0]);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      setAcceptedFiles(acceptedFiles);
+      setFile(acceptedFiles[0]);
+    },
+    [setFile]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
