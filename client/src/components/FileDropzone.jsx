@@ -20,12 +20,6 @@ const FileDropzone = ({ setFile }) => {
     ? "Drop the file here ..."
     : "Drag 'n' drop a CSV file here, or click to search your machine.";
 
-  const renderedAcceptedFiles = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
